@@ -5,10 +5,11 @@ import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
 
 import com.marlonfrazao.workshopmongo.domain.User;
+import com.marlonfrazao.workshopmongo.dto.UserDTO;
 import com.marlonfrazao.workshopmongo.repository.UserRepository;
 
 @Service
-public class UserService implements GenericService<User, String>{
+public class UserService implements GenericService<User, UserDTO, String>{
 
 	@Autowired
 	private UserRepository repository;

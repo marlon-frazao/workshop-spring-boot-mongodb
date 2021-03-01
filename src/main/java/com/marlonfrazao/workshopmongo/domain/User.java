@@ -5,8 +5,11 @@ import java.io.Serializable;
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
+import com.marlonfrazao.workshopmongo.dto.UserDTO;
+import com.marlonfrazao.workshopmongo.util.Convertible;
+
 @Document(collection="user")
-public class User implements Serializable {
+public class User implements Serializable, Convertible<UserDTO> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -72,4 +75,11 @@ public class User implements Serializable {
 			return false;
 		return true;
 	}
+
+	@Override
+	public UserDTO convert() {
+		return new UserDTO(this);
+	}
+
+	
 }

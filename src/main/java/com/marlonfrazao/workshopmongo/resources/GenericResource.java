@@ -33,4 +33,7 @@ public interface GenericResource<T extends Convertible<DTO>, DTO extends Convert
 		getService().delete(id);
 		return ResponseEntity.noContent().build();
 	}
+	
+	
+	ResponseEntity<Void> update(DTO objDto, ID id);
 }

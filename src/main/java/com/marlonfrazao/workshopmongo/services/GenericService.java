@@ -32,4 +32,8 @@ public interface GenericService<T extends Convertible<DTO>, DTO extends Converti
 		findById(id);
 		getRepository().deleteById(id);
 	}
+	
+	T update(T obj);
+	
+	void updateData(T newObj, T obj);
 }

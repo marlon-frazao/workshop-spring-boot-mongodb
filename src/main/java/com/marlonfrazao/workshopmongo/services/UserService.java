@@ -1,7 +1,5 @@
 package com.marlonfrazao.workshopmongo.services;
 
-import java.util.stream.Collectors;
-
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.mongodb.repository.MongoRepository;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,7 @@ public class UserService implements GenericService<User, UserDTO, String>{
 
 	@Override
 	public User update(User obj) {
-		User newObj = repository.findAll().stream().filter(x -> x.getId().equals(obj.getId())).collect(Collectors.toList()).get(0);
+		User newObj = repository.findById(obj.getId()).get();
 		updateData(newObj, obj);
 		return repository.save(newObj);
 	}

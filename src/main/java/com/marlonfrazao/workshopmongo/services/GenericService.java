@@ -27,4 +27,9 @@ public interface GenericService<T extends Convertible<DTO>, DTO extends Converti
 	default DTO insert(T obj) {
 		return getRepository().insert(obj).convert();
 	}
+	
+	default void delete(ID id) {
+		findById(id);
+		getRepository().deleteById(id);
+	}
 }

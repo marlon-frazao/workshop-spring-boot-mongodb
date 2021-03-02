@@ -3,6 +3,7 @@ package com.marlonfrazao.workshopmongo.resources;
 import java.util.List;
 
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RestController;
@@ -25,8 +26,11 @@ public interface GenericResource<T extends Convertible<DTO>, DTO extends Convert
 		return ResponseEntity.ok().body(getService().findById(id));
 	}
 	
-	
 	ResponseEntity<Void> insert(DTO objDto);
-		
 	
+	@DeleteMapping(value = "/{id}")
+	default ResponseEntity<Void> delete(@PathVariable ID id) {
+		getService().delete(id);
+		return ResponseEntity.noContent().build();
+	}
 }

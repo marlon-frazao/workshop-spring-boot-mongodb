@@ -18,6 +18,4 @@ public class UserService implements GenericService<User, UserDTO, String>{
 	public MongoRepository<User, String> getRepository() {
 		return repository;
 	}
-
-	
 }

@@ -3,8 +3,9 @@ package com.marlonfrazao.workshopmongo.dto;
 import java.io.Serializable;
 
 import com.marlonfrazao.workshopmongo.domain.User;
+import com.marlonfrazao.workshopmongo.util.Convertible;
 
-public class UserDTO implements Serializable{
+public class UserDTO implements Serializable, Convertible<User>{
 
 	private static final long serialVersionUID = 1L;
 	
@@ -43,5 +44,10 @@ public class UserDTO implements Serializable{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	@Override
+	public User convert() {
+		return new User(this);
 	}
 }

@@ -11,7 +11,7 @@ import com.marlonfrazao.workshopmongo.services.exception.ObjectNotFoundException
 import com.marlonfrazao.workshopmongo.util.Convertible;
 
 @Service
-public interface GenericService<T extends Convertible<DTO>, DTO, ID> {
+public interface GenericService<T extends Convertible<DTO>, DTO extends Convertible<T>, ID> {
 
 	MongoRepository<T, ID> getRepository();
 	
@@ -22,5 +22,9 @@ public interface GenericService<T extends Convertible<DTO>, DTO, ID> {
 	default DTO findById(ID id) {
 		Optional<T> obj = getRepository().findById(id);
 		return obj.orElseThrow(() -> new ObjectNotFoundException("Objeto não encontrado")).convert();
+	}
+	
+	default DTO insert(T obj) {
+		return getRepository().insert(obj).convert();
 	}
 }

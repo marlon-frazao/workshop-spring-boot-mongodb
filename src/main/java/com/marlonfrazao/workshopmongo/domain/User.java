@@ -26,6 +26,12 @@ public class User implements Serializable, Convertible<UserDTO> {
 		this.name = name;
 		this.email = email;
 	}
+	
+	public User(UserDTO entity) {
+		id = entity.getId();
+		name = entity.getName();
+		email = entity.getEmail();
+	}
 
 	public String getId() {
 		return id;

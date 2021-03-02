@@ -11,7 +11,7 @@ import com.marlonfrazao.workshopmongo.services.GenericService;
 import com.marlonfrazao.workshopmongo.util.Convertible;
 
 @RestController
-public interface GenericResource<T extends Convertible<DTO>, DTO, ID> {
+public interface GenericResource<T extends Convertible<DTO>, DTO extends Convertible<T>, ID> {
 
 	GenericService<T, DTO, ID> getService();
 	
@@ -24,4 +24,9 @@ public interface GenericResource<T extends Convertible<DTO>, DTO, ID> {
 	default ResponseEntity<DTO> findById(@PathVariable ID id) {
 		return ResponseEntity.ok().body(getService().findById(id));
 	}
+	
+	
+	ResponseEntity<Void> insert(DTO objDto);
+		
+	
 }

@@ -7,9 +7,11 @@ import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.marlonfrazao.workshopmongo.dto.AuthorDTO;
+import com.marlonfrazao.workshopmongo.dto.PostDTO;
+import com.marlonfrazao.workshopmongo.util.Convertible;
 
 @Document
-public class Post implements Serializable {
+public class Post implements Serializable, Convertible<PostDTO> {
 
 	private static final long serialVersionUID = 1L;
 
@@ -29,6 +31,14 @@ public class Post implements Serializable {
 		this.title = title;
 		this.body = body;
 		this.author = author;
+	}
+
+	public Post(PostDTO entity) {
+		id = entity.getId();
+		date = entity.getDate();
+		title = entity.getTitle();
+		body = entity.getBody();
+		author = entity.getAuthor();
 	}
 
 	public String getId() {
@@ -94,5 +104,10 @@ public class Post implements Serializable {
 		} else if (!id.equals(other.id))
 			return false;
 		return true;
+	}
+
+	@Override
+	public PostDTO convert() {
+		return new PostDTO(this);
 	}
 }

@@ -1,12 +1,15 @@
 package com.marlonfrazao.workshopmongo.domain;
 
 import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import org.springframework.data.annotation.Id;
 import org.springframework.data.mongodb.core.mapping.Document;
 
 import com.marlonfrazao.workshopmongo.dto.AuthorDTO;
+import com.marlonfrazao.workshopmongo.dto.CommentDTO;
 import com.marlonfrazao.workshopmongo.dto.PostDTO;
 import com.marlonfrazao.workshopmongo.util.Convertible;
 
@@ -20,7 +23,10 @@ public class Post implements Serializable, Convertible<PostDTO> {
 	private Date date;
 	private String title;
 	private String body;
+	
 	private AuthorDTO author;
+	
+	private List<CommentDTO> comments = new ArrayList<>();
 
 	public Post() {
 	}
@@ -39,6 +45,7 @@ public class Post implements Serializable, Convertible<PostDTO> {
 		title = entity.getTitle();
 		body = entity.getBody();
 		author = entity.getAuthor();
+		comments.addAll(entity.getComments());
 	}
 
 	public String getId() {
@@ -79,6 +86,10 @@ public class Post implements Serializable, Convertible<PostDTO> {
 
 	public void setAuthor(AuthorDTO author) {
 		this.author = author;
+	}
+	
+	public List<CommentDTO> getComments() {
+		return comments;
 	}
 
 	@Override

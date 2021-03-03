@@ -1,17 +1,25 @@
 package com.marlonfrazao.workshopmongo.dto;
 
+import java.io.Serializable;
+import java.util.ArrayList;
 import java.util.Date;
+import java.util.List;
 
 import com.marlonfrazao.workshopmongo.domain.Post;
 import com.marlonfrazao.workshopmongo.util.Convertible;
 
-public class PostDTO implements Convertible<Post>{
+public class PostDTO implements Convertible<Post>, Serializable{
 
+	private static final long serialVersionUID = 1L;
+	
 	private String id;
 	private Date date;
 	private String title;
 	private String body;
+	
 	private AuthorDTO author;
+	
+	private List<CommentDTO> comments = new ArrayList<>();
 	
 	public PostDTO() {}
 	
@@ -21,6 +29,7 @@ public class PostDTO implements Convertible<Post>{
 		title = entity.getTitle();
 		body = entity.getBody();
 		author = entity.getAuthor();
+		comments.addAll(entity.getComments());
 	}
 
 	public String getId() {
@@ -61,6 +70,10 @@ public class PostDTO implements Convertible<Post>{
 
 	public void setAuthor(AuthorDTO author) {
 		this.author = author;
+	}
+	
+	public List<CommentDTO> getComments() {
+		return comments;
 	}
 
 	@Override

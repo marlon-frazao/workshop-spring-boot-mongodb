@@ -31,6 +31,6 @@ public class PostService implements GenericService<Post, PostDTO, String>{
 	}
 
 	public List<Post> findByTitle(String text) {
-		return repository.findByTitleContainingIgnoreCase(text);
+		return repository.findByTitle(text);
 	}
 }

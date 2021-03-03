@@ -1,12 +1,17 @@
 package com.marlonfrazao.workshopmongo.resources;
 
+import java.util.List;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import com.marlonfrazao.workshopmongo.domain.Post;
 import com.marlonfrazao.workshopmongo.dto.PostDTO;
+import com.marlonfrazao.workshopmongo.resources.util.URL;
 import com.marlonfrazao.workshopmongo.services.GenericService;
 import com.marlonfrazao.workshopmongo.services.PostService;
 
@@ -33,4 +38,9 @@ public class PostResource implements GenericResource<Post, PostDTO, String>{
 		return null;
 	}
 
+	@GetMapping(value = "/titlesearch")
+	public ResponseEntity<List<Post>> findByTitle(@RequestParam(value = "text", defaultValue = "") String text) {
+		text = URL.decodeParam(text);
+		return ResponseEntity.ok().body(service.findByTitle(text));
+	}
 }

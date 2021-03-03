@@ -1,7 +1,10 @@
 package com.marlonfrazao.workshopmongo.dto;
 
 import java.io.Serializable;
+import java.util.ArrayList;
+import java.util.List;
 
+import com.marlonfrazao.workshopmongo.domain.Post;
 import com.marlonfrazao.workshopmongo.domain.User;
 import com.marlonfrazao.workshopmongo.util.Convertible;
 
@@ -13,6 +16,8 @@ public class UserDTO implements Serializable, Convertible<User>{
 	private String name;
 	private String email;
 	
+	private List<Post> posts = new ArrayList<>();
+	
 	public UserDTO() {
 	}
 	
@@ -20,6 +25,7 @@ public class UserDTO implements Serializable, Convertible<User>{
 		id = obj.getId();
 		name = obj.getName();
 		email = obj.getEmail();
+		posts.addAll(obj.getPosts());
 	}
 
 	public String getId() {
@@ -44,6 +50,10 @@ public class UserDTO implements Serializable, Convertible<User>{
 
 	public void setEmail(String email) {
 		this.email = email;
+	}
+	
+	public List<Post> getPosts() {
+		return posts;
 	}
 
 	@Override
